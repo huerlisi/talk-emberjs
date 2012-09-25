@@ -1,0 +1,65 @@
+http://www.embernoob.com/
+
+
+
+1. What is EmberJS
+
+2. Environment
+- HandleBars
+- EmberData
+- Rake::Pipeline
+
+3. QA and Q&A
+- QUnit
+- YUIDoc
+- jsFiddle
+- GitHub
+
+3. Basic Concepts
+- Bindings
+- Computed Properties
+- MVC
+
+4. Declarative Thinking
+- Looks like JSON
+- 
+
+5. Differences to Rails
+- Actions in Models
+- Monkey Patching is State of the Art
+- Not so DRY
+
+6. RailsBinding
+- Yehuda Katz
+- ember-rails: conventions, delievery
+- active_model_serializers
+- Convention over Configuration
+
+7. Cool Stuff
+- Progressive Loading
+- Statefull Routing
+- CoffeScript looks clean
+- Back to BASIC
+  The main OS comes with a Debugger and Interpreter
+
+8. Offline Websites
+- RackOffline
+- LocalStorage
+- EmberData promises
+
+9. PhoneGap
+ 1. Follow the Tutorials
+ 2. Copy App to /assets/www
+ 3. Profit
+
+10. Where to Go?
+- http://emberjs.com/ Docs and API
+- IRC: #emberjs
+- http://stackoverflow.com/questions/tagged/ember.js
+- http://code418.com/ember.js-dashboard/
+- https://github.com/bazzel/ember-sample3
+- http://bradleypriest.com/2012/09/24/whats-new-in-emberjs-15/
+- http://jsfiddle.net/odigity/PkT8x/
+- 
+
+QRCode => emberjs.cyt.ch
