@@ -10,3 +10,18 @@
 .reveal a:not(.image):hover { color: #DCA3A3; }
 .reveal .roll span:after { background: #DCA3A3; }
 
+.reveal .slides section .fragment {
+  opacity: 0.2;
+}
+
+.reveal .slides section .fragment.visible {
+  opacity: 1;
+}
+
+.reveal .slides section *[data-fragment-id] {
+  display: none;
+}
+
+.reveal .slides section *[data-fragment-id].visible {
+  display: block;
+}

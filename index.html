@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>ember.js - </title>
+		<title>EmberJS </title>
 
-		<meta name="description" content="Ember.js introduction">
+		<meta name="description" content="EmberJS introduction">
 		<meta name="author" content="Simon Huerlimann <simon.huerlimann@cyt.ch>">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -66,12 +66,12 @@
 				<section>
 					<h2>Ecosystem</h2>
 					<ul>
-						<li>HandleBars</li>
-						<li class="blurred">EmberData</li>
-						<li class="blurred">Rake::Pipeline</li>
+						<li class="fragment" data-fragment-show="handlebars">HandleBars</li>
+						<li class="fragment" data-fragment-show="emberdata">EmberData</li>
+						<li class="fragment" data-fragment-show="rakepipeline">Rake::Pipeline</li>
 
 					</ul>
-					<pre><code contenteditable>
+					<pre data-fragment-id="handlebars"><code contenteditable>
 &lt;h1>Comments&lt;/h1>
 
 &lt;div id="comments">
@@ -81,15 +81,7 @@
   {{/each}}
 &lt;/div>
 					</code></pre>
-				</section>
-				<section>
-					<h2>Ecosystem</h2>
-					<ul>
-						<li class="blurred">HandleBars</li>
-						<li>EmberData</li>
-						<li class="blurred">Rake::Pipeline</li>
-					</ul>
-					<pre><code contenteditable>
+					<pre data-fragment-id="emberdata"><code contenteditable>
 App.Person = DS.Model.extend({
     firstName: DS.attr('string'),
     lastName: DS.attr('string'),
@@ -100,15 +92,7 @@ App.Person = DS.Model.extend({
     }.property('firstName', 'lastName')
 });
 					</code></pre>
-				</section>
-				<section>
-					<h2>Ecosystem</h2>
-					<ul>
-						<li class="blurred">HandleBars</li>
-						<li class="blurred">EmberData</li>
-						<li>Rake::Pipeline</li>
-					</ul>
-					<pre><code contenteditable>
+					<pre data-fragment-id="rakepipeline"><code contenteditable>
   match 'modules/**/*.js' do
     if ENV['RAKEP_MODE'] == 'production'
       filter EmberAssertFilter
@@ -139,27 +123,99 @@ App.Person = DS.Model.extend({
 				<section>
 					<h2>Basic Concepts</h2>
 					<ul>
-						<li class="fragment">Bindings</li>
-						<li class="fragment">Computed Properties</li>
-						<li class="fragment">MVC</li>
+						<li data-fragment-show="bindings" class="fragment">Bindings</li>
+						<li data-fragment-show="computed-properties" class="fragment">Computed Properties</li>
+						<li data-fragment-show="mvc" class="fragment">MVC</li>
 					</ul>
+					<pre><code data-fragment-id="bindings" contenteditable>
+MyApp.president = Ember.Object.create({
+  name: "Barack Obama"
+});
+MyApp.country = Ember.Object.create({
+  // Ending a property with 'Binding' tells Ember to
+  // create a binding to the presidentName property.
+  presidentNameBinding: 'MyApp.president.name'
+});
+// Later, after Ember has resolved bindings...
+MyApp.country.get('presidentName');
+// "Barack Obama"
+					</code></pre>
+					<pre><code data-fragment-id="computed-properties" contenteditable>
+Person = Ember.Object.extend({
+  // these will be supplied by `create`
+  firstName: null,
+  lastName: null,
+  fullName: function() {
+    var firstName = this.get('firstName');
+    var lastName = this.get('lastName');
+   return firstName + ' ' + lastName;
+  }.property('firstName', 'lastName')
+});
+var himself = Person.create({
+  firstName: "Donald",
+  lastName: "Duck"
+});
+himself.get('fullName') // "Donald Trump"
+					</code></pre>
+					<pre><code data-fragment-id="mvc" contenteditable>
+controllers
+helpers
+models
+routes
+templates
+views
+					</code></pre>
 				</section>
 
 				<section>
 					<h2>Declarative Thinking</h2>
 					<ul>
-						<li>The Router</li>
-						<li>Looks like JSON</li>
-						<li>Ember::Object is Hash on Steroids</li>
+						<li data-fragment-show="the-router" class="fragment">The Router</li>
+						<li data-fragment-show="properties" class="fragment">Properties, properties, properties...</li>
 					</ul>
+					<pre data-fragment-id="the-router"><code contenteditable>
+App.Router = Ember.Router.extend({
+  root: Ember.Route.extend({
+    index: Ember.Route.extend({
+      route: '/',
+      redirectsTo: 'posts'
+    }),
+    posts: Ember.Route.extend({
+      route: '/posts',
+      connectOutlets: function(router) {
+        router.get('applicationController').connectOutlet('posts', App.Post.find());
+      }
+    }),
+    post: Ember.Route.extend({
+      route: '/posts/:post_id'
+    })
+  })
+});
+					</code></pre>
+					<pre data-fragment-id="properties"><code contenteditable>
+
+App.Models.Task = DS.Model.extend({
+  // Properties:
+  //
+  title:      DS.attr('string'),
+  completed:  DS.attr('boolean'),
+  created_at: DS.attr('string'),
+
+  // Observe changes and persist them in elasticsearch
+  //
+  changed: function() {
+    App.store.commit()
+  }.observes('completed')
+});
+					</code></pre>
 				</section>
 
 				<section>
 					<h2>Differences to Rails</h2>
 					<ul>
-						<li class="fragment">Actions defined in Views/Router</li>
-						<li class="fragment">Monkey Patching is State of the Art</li>
-						<li class="fragment">Not so DRY</li>
+						<li>Actions defined in Views/Router</li>
+						<li>Monkey Patching is State of the Art</li>
+						<li>Not so DRY</li>
 					</ul>
 				</section>
 
@@ -223,7 +279,7 @@ App.Person = DS.Model.extend({
 					</ul>
 				</section>
 
-				<section id="last">
+				<section id>
 					<h2>Resources</h2>
 					<ul>
 						<li><a href="http://code418.com/ember.js-dashboard/">Ember.js Dashboard</a></li>
@@ -232,6 +288,13 @@ App.Person = DS.Model.extend({
 						<li><a href="http://emberjs.com/documentation/">Official Documentation</a></li>
 						<li><a href="http://www.elasticsearch.org/tutorials/2012/08/22/javascript-web-applications-and-elasticsearch.html">JavaScript Web Applications and elasticsearch</a></li>
 					</ul>
+				</section>
+
+				<section id="last">
+					<h2>Merci!</h2>
+					<p>
+						Slides: <a href="http://talks.cyt.ch/talk-emberjs">http://talks.cyt.ch/talk-emberjs</a>
+					</p>
 				</section>
 			</div>
 
@@ -273,6 +336,28 @@ App.Person = DS.Model.extend({
 					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
 				]
 			});
+
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+			    var code = event.fragment.getAttribute('data-fragment-show');
+			    var nodes = document.querySelectorAll("*[data-fragment-id]");
+			    for( var i = 0, len = nodes.length; i < len; i++ ) {
+				var node = nodes[i];
+				node.classList.remove('visible');
+		            };
+
+			    var element = document.querySelector("*[data-fragment-id='"+ code + "']");
+			    if (element) {
+				element.classList.add('visible');
+			    };
+			} );
+
+			Reveal.addEventListener( 'fragmenthidden', function( event ) {
+			    var code = event.fragment.getAttribute('data-fragment-show');
+			    var element = document.querySelector("*[data-fragment-id='"+ code + "']");
+			    if (element) {
+				element.classList.remove('visible');
+			    };
+			} );
 
 		</script>
 
