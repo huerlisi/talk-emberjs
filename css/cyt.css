@@ -1,3 +1,12 @@
 .reveal .blurred {
   opacity: 0.2;
 }
+
+#present, #last {
+  background: url('../img/cyt.png') no-repeat center bottom;
+}
+
+.reveal a:not(.image) { color: #DCA3A3; }
+.reveal a:not(.image):hover { color: #DCA3A3; }
+.reveal .roll span:after { background: #DCA3A3; }
+
